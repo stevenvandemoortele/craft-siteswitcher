@@ -75,7 +75,9 @@ class SiteSwitcherService extends Component
     {
         // If element is not localized, bail
         if (!$element->isLocalized()) {
-            return false;
+            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
+            $baseUrl = Craft::parseEnv($site->baseUrl);
+            return $baseUrl;
         }
 
         // Get localized element
@@ -86,7 +88,9 @@ class SiteSwitcherService extends Component
 
         // If no localized element exists, bail
         if (!$localeElement) {
-            return false;
+            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
+            $baseUrl = Craft::parseEnv($site->baseUrl);
+            return $baseUrl;
         }
 
         // Return localized element URL
